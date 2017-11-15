@@ -5,12 +5,15 @@ Description: A tinder-like app that connects people with jobs. Users can set up
 either a job profile or a candidate profile and view profiles of the opposite type. 
 Users can "like" a job or candidate and if the interest is mutual, both parties will be 
 alerted. Each user will maintain a list of matches.
+TA: Deeksha Chaudhary
 
 Rubric: 
 
 1. Rubric submitted (5 points)
 
-2. Data management: (15 points)
+2. Learn AngularJS (10 points)
+
+3. Data management: (15 points)
 --Set up a database with the following tables: jobs, candidates, matches, likes (10 points)
 	--jobs
 		--picture
@@ -38,40 +41,37 @@ Rubric:
 		--profile liked
 --Use an AJAX request to pull in the data into a factory (5 points)
 
-3. Views: (15 points)
+4. Views: (15 points)
 --Show/edit own profile (5 points)
 --Show profiles (5 points)
 --Show matches (5 points)
 
-4. Functionality--use controllers (36 points):
+5. Functionality--use controllers (23 points):
 --Show/edit own profile
 	--Edit any field (4 points)
-	--filters for jobs: location, industry, salary, skills (3 points)
-	--filters for candidates: GPA, major, skills, desired salary (3 points)
 --Show profiles
 	--"swiping" feature (4 points)
-	--display profiles in order of most liked (4 points)
 --Show matches
 	--format: "company name -- title " (2 points)
-	--Users can click on matches which will redirect them to a link for the job application (3 points)
 	--search within matches (4 points)
 --Other 
 	--create a job profile or job seeker profile (4 points)
 	--users can't see other profiles until they login. also, users can logout. (3 points)
 	--alert when users when they have a new match (2 points)
 
-5. Best practices (14 points):
+6. Best practices (14 points):
 --Code is well formatted and easy to read, with proper commenting (2 points)
 --If storing passwords, they are stored salted and encrypted (2 points)
 --Safe from SQL injection attacks (2 points)
---All AJAX requests that either contain sensitive information or modify something on the 	server are performed via POST, not GET (3 points)
+--All AJAX requests that either contain sensitive information or modify something on the server are performed via POST, not GET (3 points)
 --Safe from XSS attacks; that is, all content is escaped on output (3 points)
 --Page passes the W3C validator (2 points)
 
-6. Usability (5 points): 
+7. Usability (5 points): 
 --Visually appealing (1 point)
 --Intutive to use and navigate (4 points)
 
-7. Creative portion (10 points)
+8. Creative portion (13 points)
+
 
 
