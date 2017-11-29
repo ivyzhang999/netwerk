@@ -16,7 +16,7 @@ Rubric:
 3. Data management: (15 points)
 --Set up a database with the following tables: jobs, candidates, matches, likes (10 points)
 	--jobs
-		--picture
+		--job id
 		--company name
 		--location
 		--title
@@ -25,20 +25,24 @@ Rubric:
 		--required skills -- binary of predetermined skills
 		--job summary/description
 	--candidates
-		--picture
-		--name
+		--candidate id
+		--first name
+		--last name
+		--username
+		--password
 		--current location
 		--desired location
 		--most recent job
-		--university (past or current)
+		--most recent education
 		--major
 		--GPA
-		--skills -- binary of predetermined skills
+		--skills -- binary of predetermined skills (front end, back end, data science)
 		--desired salary
 		--fun fact
 	--likes
 		--liker
 		--profile liked
+		--type of liker
 --Use an AJAX request to pull in the data into a factory (5 points)
 
 4. Views: (15 points)
