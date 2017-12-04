@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Netwerk</title>
+    <script src="angular.min.js"></script> 
+    <script src="angular-touch/angular-touch.js"></script>
+<!--     <script src="swing.js"></script>
+ -->
+  </head>
+  
+
+
+  <body ng-app="netwerk">
+    
+    <div class="header">
+      <div class="container">
+        <h1>Netwerk</h1>
+      </div>
+    </div>
+
+   <!--  <div class="current_info">
+      <p id = "current_user" type="hidden"></p>
+      <p id = "profile_type" type="hidden"></p>
+      <p id = "index" type="hidden"></p>
+    </div> -->
+
+    <div class = "main" ng-controller="mainController">
+      <h4><strong>Login</strong></h4>
+      <form method = "post" id = "login">
+        Type: 
+        <input type= "radio" ng-model="login.profile_type" name = "profile_type" value="candidate">Candidate
+        <input type= "radio" ng-model="login.profile_type" name = "profile_type" value="job">Job
+        Username: <input type="text" id = "login_u" ng-model = "login.username" />
+        Password: <input type="password" id = "login_p" ng-model = "login.password" />
+        <input type = "submit" ng-click = "login(login)" />
+      </form>
+
+
+      <form id = "logout">
+        <input type = "button" value = "logout" ng-click = "logout()" />
+      </form>
+
+
+      <div class="matches"> 
+        <h4><strong>Matches</strong></h4>
+        <input type="text" ng-model="search" />
+        <p ng-repeat="match in matches_info | filter: search">
+          {{match}}
+        </p>
+        <!-- <p class = "matches">{{matches}}</p> -->
+      </div>
+
+      <!-- <button class="button button-block"
+        ng-repeat="profile in profiles"
+        ng-click="like(profile)">
+        {{ profile }}
+      </button> -->
+
+      <div class="buttons">
+        <form id = "logout">
+          <input type="button" value="right" ng-click="swipeRight()"/>
+          <input type="button" value="left" ng-click="swipeLeft()"/>
+        </form>
+      </div>
+
+      <div class="profiles">
+        <h4><strong>Profiles</strong></h4>
+        <p class = "profiles" ng-swipe-right = "swipeRight()" ng-swipe-left = "swipeLeft()">{{profiles[index]}}</p>
+      </div>
+    </div>
+
+    <div class = "create" ng-controller="createController">
+      <h4><strong>Create profile</strong></h4>
+      <form method = "post" id = "create">
+        Type: 
+        <input type= "radio" ng-model="profile_type" ng-model="candidate_info.profile_type" name = "profile_type" value="candidate">Candidate
+        <input type= "radio" ng-model="profile_type" name = "profile_type" value="job">Job
+      </form>
+
+      <div ng-switch="profile_type">
+        <div ng-switch-when="candidate">
+          <form method = "post" id = "create_candidate">
+            New username: <input type="text" id = "create_u" ng-model = "candidate_info.create_u" />
+            New password (at least 5 characters): <input type="password" id = "create_p" ng-model = "candidate_info.create_p" />
+            First name: <input type="text" id = "create_first" ng-model = "candidate_info.create_first" />
+            Last name: <input type="text" id = "create_last" ng-model = "candidate_info.create_last" />
+            Current location: <input type="text" id = "create_cloc" ng-model = "candidate_info.create_cloc" />
+            Desired location: <input type="text" id = "create_dloc" ng-model = "candidate_info.create_dloc" />
+            Most recent job: <input type="text" id = "create_job" ng-model = "candidate_info.create_job" />
+            Education: <input type="text" id = "create_edu" ng-model = "candidate_info.create_edu" />
+            Major <input type="text" id = "create_major" ng-model = "candidate_info.create_major" />
+            GPA: <input type="number" step = "0.1" min = "0.0" max = "4.0" id = "create_gpa" ng-model = "candidate_info.create_gpa" />
+            Skills:
+            <input type="checkbox" id = "skills1" name = skills1 ng-model = "candidate_info.skills1" ng-init="candidate_info.skills1=false" />Front end
+            <input type="checkbox" id = "skills2" name = "skills2" ng-model = "candidate_info.skills2" ng-init="candidate_info.skills2=false" />Back end
+            <input type="checkbox" id = "skills3" name = "skills3" ng-model = "candidate_info.skills3" ng-init="candidate_info.skills3=false"/>Data science
+            Salary: <input type="number" min = "0" id = "create_sal" ng-model = "candidate_info.create_sal" />
+            Fun fact: <input type="text" id = "create_fun" ng-model = "candidate_info.create_fun"/>
+            
+            <!-- <input type="hidden" id="profile_type" ng-model="candidate_info.profile_type" value="candidate"/> -->
+            <input type = "submit" ng-click = "createCandidate(candidate_info)" />
+          </form>
+           
+        </div>
+      </div>
+
+
+
+      <div ng-switch="profile_type">
+        <div ng-switch-when="job">
+        <form method = "post" id = "create_j">
+          New username: <input type="text" id = "create_company_u" name="create_company_u" ng-model = "job_info.create_company_u" />
+          New password: <input type="password" id = "create_company_p" name="create_company_p" ng-model = "job_info.create_company_p" />
+          Company name: <input type="text" id = "create_company_name" name="create_company_name" ng-model = "job_info.create_company_name" />
+          Location: <input type="text" id = "create_company_loc" name="create_company_loc" ng-model = "job_info.create_company_loc" />
+          Title: <input type="text" id = "create_title" name="create_title" ng-model = "job_info.create_title"/>
+          Industry: <input type="text" id = "create_industry" name="create_industry" ng-model = "job_info.create_industry" />
+          Skills: 
+          <input type="checkbox" id = "company_skills1" name = "company_skills1" value = "frontend" ng-model = "job_info.company_skills1" ng-init="job_info.skills1=false"/>Front end
+          <input type="checkbox" id = "company_skills2" name = "company_skills2" value = "backend" ng-model = "job_info.company_skills2" ng-init="job_info.skills2=false"/>Back end
+          <input type="checkbox" id = "company_skills3" name = "company_skills3" value = "data_science" ng-model = "job_info.company_skills3" ng-init="job_info.skills3=false"/>Data science
+          Salary: <input type="text" id = "create_company_sal" name="create_company_sal" ng-model = "job_info.create_company_sal" />
+          Description: <input type="text" id = "create_desc" name="create_desc" ng-model = "job_info.create_desc" />
+          <!-- <input type="hidden" id="profile_type" value="job" /> -->
+          <input type = "submit" ng-click = "createJob(job_info)" />
+        </form>
+
+         </div>
+      </div>
+
+
+    </div> 
+    
+
+
+
+<!-- 
+    <div class="main" ng-controller="mainController">
+      <div class="container">
+        <p class = "profiles">{{profiles}}</p>
+      </div>
+    </div> -->
+
+
+
+
+
+   <!--  Modules -->
+    <script src="app.js"></script>
+
+   <!--  Controllers -->
+    <script src="mainController.js"></script>
+    <script src="createController.js"></script>
+<!--     <script src="loginController.js"></script>
+ -->
+
+  </body>
+</html>
