@@ -1,9 +1,5 @@
 app.controller('createController', function($scope, Upload, $rootScope, $http){
 	$scope.createCandidate = function(candidate_info, file){
-		// get profile type
-		// var profile_type = document.getElementById("profile_type");
-
-		// parse info skills checkboxes
 		var skills = '';
 		if (candidate_info.skills1){
 			skills += '1';
@@ -48,13 +44,6 @@ app.controller('createController', function($scope, Upload, $rootScope, $http){
 					alert(response.data.message);
 				}else{
 					alert("you have successfully created a profile!");
-					file.upload = Upload.upload({
-				      url: 'profile_pic.php',
-				      data: {username: candidate_info.username, file: file},
-				    });
-					file.upload.then(function (response) {
-				       alert(response.data.message);
-				    });
 
 				}
 			});

@@ -1,8 +1,6 @@
 <?php
 require 'db.php';
 $params = json_decode(file_get_contents('php://input'));
-
-
 $profile_type = (string) $params->profile_type;
 
 if ($profile_type == "candidate"){
@@ -214,7 +212,5 @@ else{
 	  ));
 	exit;
 }
-
-
 
 ?>

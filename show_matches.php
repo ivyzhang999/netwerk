@@ -51,23 +51,6 @@ for ($i = 0; $i < sizeof($liked_rows); $i++){
       $matches_send[] = $liked_rows[$i];
     }
 }
-//      array_push($matches_send, "hi");
-
-//     if ($row_likes['liked'] == $row_liked['liker']){
-//       // array_push($matches_send, $row_likes['liked']);
-//       array_push($matches_send, "hello");
-
-//     }
-//   }
-// }
-
-// while($row_likes = mysqli_fetch_assoc($likes)){
-//   array_push($matches_send, $row_likes['liked']);
-// }
-
-// for ($i =0; $i < sizeof($matches_send); $i++){
-  
-// }
 
 // send json of matches
 echo json_encode(array(

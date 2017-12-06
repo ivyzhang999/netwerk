@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8"/>
     <title>Netwerk</title>
     <script src="angular.min.js"></script> 
     <script src="angular-touch/angular-touch.js"></script>
@@ -37,13 +38,13 @@
         width: 20%;
       }
       .current_user{
-        display:inline-block; 
         float: right;
         text-align:left;
-        width: 20%;
+        width:40%;
       }
       .holder{
         clear:both;
+        position:relative;
       }
    
       .tablink {
@@ -63,61 +64,8 @@
       .tablink:hover {
           background-color: #8c8c8c;
       }
-
-      /*.today h3{
-        color: yellow;
-      }
-      p{
-        text-align: center; 
-        padding: 0px; 
-        margin: auto; 
-        width: 500px; 
-      }
-      h1{
-        text-align: center; 
-        color: red;
-        font-family: "Impact";
-      }
-      h4{color: red; padding:0px; margin: 0px;}
-      h3{color: white; padding:0px; margin: 0px; text-align: center;}
-      table {
-          table-layout: fixed;
-          width: 100px;
-      }
-      th {
-          border: 1px solid white;
-          table-layout: fixed;
-      }
-      td {
-        vertical-align: top;
-        border: 1px solid white;
-        height: 100px;
-      }*/
-      
-      /*.logout{
-        visibility: hidden;
-      }
-      .register{
-        display:inline-block; 
-        float: right;
-      }
-      .current_user_msg{
-        clear:both;
-        visibility: hidden;
-      }
-      .previous_month{display:inline-block;}
-      .next_month{display:inline-block; float: right;}
-      button{
-          background-color: #87CEFA;
-          border: none;
-          color: black;
-          cursor: pointer;
-      }*/
     </style>
   </head>
-
-  
-
 
   <body data-ng-app="netwerk">
     
@@ -134,7 +82,6 @@
         <br>
     </div>
 
- 
     <div class = "top_right" data-ng-controller="mainController">
       <div class = "login">
         Login
@@ -151,20 +98,25 @@
       </div>
 
       <form class = "logout" id = "logout">
-        <input type = "button" value = "logout" data-ng-click = "logout()" />
+        <input type = "submit" value = "Loginogout" data-ng-click = "logout()" />
       </form>
 
-
-      <p class = "current_user" data-ng-show="logBool == 1">
-        You are currently logged in as {{current_user}} 
-      </p>
-    </div>
+      <div class = "current_user">
+        <p  data-ng-show="logBool == 1">
+          You are currently logged in as <b> {{current_user}} </b>
+        </p> 
+      </div>
+       
+      </div>
 
     <div class="holder">
     </div>
 
     <form action="#/!">
-      <input class = "tablink" type="submit" value="Main" />
+      <input data-ng-show ="profile_type =='candidate'" class = "tablink" type="submit" value="Job profiles" />
+      <input data-ng-show ="profile_type =='job'" class = "tablink" type="submit" value="Candidate profiles" />
+      <input data-ng-show ="profile_type ==''" class = "tablink" type="submit" value="Profiles" />
+      <input data-ng-show ="profile_type == undefined" class = "tablink" type="submit" value="Profiles" />
     </form>
     <form action="#!create">
       <input class = "tablink" type="submit" value="Create profile" />
@@ -173,20 +125,9 @@
       <input class = "tablink" type="submit" value="My profile" />
     </form>
     <form action="#!matches">
-      <input class = "tablink" type="submit" value="Show matches" />
+      <input class = "tablink" type="submit" value="My matches" />
     </form>
- 
-
-    <!-- <a href="#/!">Main</a> -->
-    <!-- <a href="#!create">Create profile</a> -->
-    <!-- <a href="#!edit">My profile</a>
-    <a href="#!matches">Show matches</a> -->
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    
     <div data-ng-view=""></div>
 
 

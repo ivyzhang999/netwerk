@@ -81,13 +81,13 @@ else{
 	$stmt->bind_result($pwd_hash, $company_name, $location, $title, $industry, $skills, $salary, $description);
 	$stmt->fetch();
 	$stmt->close();
+	
 	// Compare the submitted password to the actual password hash
 	if(password_verify($password, $pwd_hash)){
 		ini_set("session.cookie_httponly", 1);
 		session_start();
 		$_SESSION['username'] = $username;
 		$_SESSION['profile_type'] = $profile_type;
-		// $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
 		echo json_encode(array(
 			"success" => true,
 			"username" => $username,
@@ -110,10 +110,5 @@ else{
 	}
 	
 }
-
-
-
-
-
 
 ?>

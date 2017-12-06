@@ -1,23 +1,115 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
     <title>Netwerk</title>
+    <style>
+      input[type=submit]{
+        background-color: #ff6f69;
+        border: none;
+        color: black;
+        cursor: pointer;
+      }
+      .left_button{
+        display:inline-block;
+        float: left;
+        width: 20%;
+        border: none;
+        color: black;
+        cursor: pointer;
+      }
+      .job_profiles, .candidate_profiles {
+        display:inline-block;
+        text-align: center;
+        border-radius: 25px;
+        background: #cccccc;
+        padding: 20px; 
+        width: auto;
+        height: auto;  
+        margin-left: auto; 
+        margin-right: auto; 
+        /*position: relative */
+      }
+      .job_profiles, .candidate_profiles p{
+        /*margin: 0 auto;*/
+        /*position: absolute;
+        top: 50%;
+        left: auto;*/
+      }
+      .right_button{
+        float: right;
+        display:inline-block;
+        color: black;
+      }
+      input[type=button]{
+          background-color: #e6ffff;
+          border-radius: 25px;
+          border: none;
+          color: black;
+          cursor: pointer;
+          flex:1;
+          padding: 125px 100px;
+          font-family: "Futura";
+          font-size: 30px;
+      }
+      /* Change background color of buttons on hover */
+      input[type=button]:hover {
+          background-color: #8c8c8c;
+      }
+    </style>
   </head>    
   <body> 
 
-    <div class = "main" data-ng-controller="mainController">
-      <div class="buttons">
-        <form id = "swipe">
-          <input type="button" value="right" data-ng-click="swipeRight()" data-ng-show="logBool == 1"/>
-          <input type="button" value="left" data-ng-click="swipeLeft()" data-ng-show="logBool == 1"/>
+    <div class = "main" data-ng-controller="mainController" data-ng-show ="index < len">
+      <div class="left_button">
+        <form id = "swipe_left">
+         <input type="button" value="No" data-ng-click="swipeLeft()" data-ng-show="logBool == 1"/>
         </form>
       </div>
 
       <div class="profiles">
-        <h4 data-ng-show="logBool == 1"><strong>Profiles</strong></h4>
-        <p class = "profiles" data-ng-swipe-right = "swipeRight()" data-ng-swipe-left = "swipeLeft()">{{profiles[index]}}</p>
+        <div class="candidate_profiles" data-ng-show ="profile_type == 'job'" data-ng-swipe-right = "swipeRight()" data-ng-swipe-left = "swipeLeft()" >
+          <p>
+            <b>Name:</b> {{profiles[index].first_name}}
+            {{profiles[index].last_name}}<br>
+            <b>Education:</b> {{profiles[index].education}}<br>
+            <b>Major:</b> {{profiles[index].major}}<br>
+            <b>GPA:</b> {{profiles[index].gpa}}<br>
+            <b>Most recent job:</b> {{profiles[index].most_recent_job}}<br>
+            <b>Current location:</b> {{profiles[index].current_location}}<br>
+            <b>Desired location:</b> {{profiles[index].location}}<br>
+            <b>Desired salary:</b> {{profiles[index].salary | currency}}<br>
+            <b>Skills: </b><br>
+            <b>Front end?</b> {{profiles[index].skills1}}<br>
+            <b>Back end?</b> {{profiles[index].skills2}} <br>
+            <b>Data science?</b> {{profiles[index].skills3}} <br>
+            <b>Fun fact:</b> {{profiles[index].fun_fact}} 
+          </p>
+        </div>
+        <div class = "job_profiles" data-ng-show ="profile_type == 'candidate'" data-ng-swipe-right = "swipeRight()" data-ng-swipe-left = "swipeLeft()">
+          <p>
+            <b>Company name:</b> {{profiles[index].company_name}}<br>
+            <b>Title:</b> {{profiles[index].title}}<br>
+            <b>Industry:</b> {{profiles[index].industry}}<br>
+            <b>Location:</b> {{profiles[index].location}}<br>
+            <b>Salary:</b> {{profiles[index].salary | currency}}<br>
+            <b>Skills:</b> <br>
+            <b>Front end?</b> {{profiles[index].skills1}}<br>
+            <b>Back end?</b> {{profiles[index].skills2}} <br>
+            <b>Data science?</b> {{profiles[index].skills3}} <br>
+            <b>Description: </b>{{profiles[index].description}}
+          </p>
+       </div>
+
+       <div class="right_button">
+        <form id = "swipe_right">
+          <input type="button" value="Yes" data-ng-click="swipeRight()" data-ng-show="logBool == 1"/>
+        </form>
+      </div>
+
       </div>
     </div>
+
 
   </body>
 </html> 

@@ -1,56 +1,136 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
+    <title>Netwerk</title>
+    <style>
+      input[type=submit]{
+        background-color: #ffeead;
+        border: none;
+        color: black;
+        cursor: pointer;
+      }
+      .candidate_profile, .job_profile {
+        display:inline-block;
+        text-align: center;
+        border-radius: 25px;
+        background: #cccccc;
+        padding: 20px; 
+        width: auto;
+        height: auto;     
+        position: relative;
+        margin-left: 40%;
+      }
+      .info{
+        display:flex;
+      }
+      .suggestions{
+        display:inline-block;
+        text-align: center;
+        border-radius: 25px;
+        background: #ccff33;
+        padding: 20px; 
+        width: 48%;
+        height: auto;     
+        position: relative;
+      }
+      .skills{
+        display:inline-block;
+        text-align: center;
+        border-radius: 25px;
+        background: #ccfff5;
+        padding: 20px; 
+        height: auto;     
+        position: relative;
+        flex:1;
+      }
+    </style>
   </head>
   <body>
     <div class = "edit_candidate" data-ng-show="profile_type == 'candidate'">
-      {{current_profile}}
-      <!-- {{profile_picture}} -->
-      
-      <p>Job suggestion (from GitHub Jobs) </p>
-      {{suggestion}}
-      
-      <p data-ng-show = "headerBool == 1">Skills development resources </p>
-      <p data-ng-show = "skills1Bool == 1">Front end <a href = "https://www.w3schools.com/html/default.asp">w3schools HTML</a></p>
-      <p data-ng-show = "skills2Bool == 1">Back end <a href = "https://www.w3schools.com/php/default.asp">w3schools PHP</a> </p>
-      <p data-ng-show = "skills3Bool == 1">Data science <a href = "https://www.w3schools.com/sql/default.asp">w3schools MySQL</a></p>
+      <div class="current_profile">
+        <div class="candidate_profile" data-ng-show ="profile_type == 'candidate'">
+          <p>
+            <b>Name:</b> {{current_profile.first_name}}
+            {{current_profile.last_name}}<br>
+            <b>Education:</b> {{current_profile.education}}<br>
+            <b>Major:</b> {{current_profile.major}}<br>
+            <b>GPA:</b> {{current_profile.gpa}}<br>
+            <b>Most recent job:</b> {{current_profile.most_recent_job}}<br>
+            <b>Current location:</b> {{current_profile.current_location}}<br>
+            <b>Desired location:</b> {{current_profile.location}}<br>
+            <b>Desired salary:</b> {{current_profile.salary | currency}}<br>
+            <b>Skills: </b><br>
+            <b>Front end?</b> {{current_profile.skills1}}<br>
+            <b>Back end?</b> {{current_profile.skills2}} <br>
+            <b>Data science?</b> {{current_profile.skills3}} <br>
+            <b>Fun fact:</b> {{current_profile.fun_fact}} 
+          </p>
+        </div>
+      </div>
+
+      <div class = "info">
+        <div class = "suggestions">
+          <p>Job suggestion (from GitHub Jobs) </p>
+          {{suggestion}}
+        </div>
+        <div class = "skills">
+          <p data-ng-show = "headerBool == 1">Skills development resources </p>
+          <p data-ng-show = "skills1Bool == 1">Front end <a href = "https://www.w3schools.com/html/default.asp">w3schools HTML</a></p>
+          <p data-ng-show = "skills2Bool == 1">Back end <a href = "https://www.w3schools.com/php/default.asp">w3schools PHP</a> </p>
+          <p data-ng-show = "skills3Bool == 1">Data science <a href = "https://www.w3schools.com/sql/default.asp">w3schools MySQL</a></p>
+        </div>
+      </div>
 
       <p data-ng-show="logBool == 1">Edit Profile</p>
       <form method = "post" id = "edit_candidate" >
-        Password: <input type="password" id = "edit_p" name="edit_p" data-ng-model = "candidate_info.edit_p" />
-        First name: <input type="text" id = "edit_first" data-ng-model = "candidate_info.edit_first" />
-        Last name: <input type="text" id = "edit_last" data-ng-model = "candidate_info.edit_last" />
-        Current location: <input type="text" id = "edit_cloc" data-ng-model = "candidate_info.edit_cloc" />
-        Desired location: <input type="text" id = "edit_dloc" data-ng-model = "candidate_info.edit_dloc" />
-        Most recent job: <input type="text" id = "edit_job" data-ng-model = "candidate_info.edit_job" />
-        Education: <input type="text" id = "edit_edu" data-ng-model = "candidate_info.edit_edu" />
-        Major <input type="text" id = "edit_major" data-ng-model = "candidate_info.edit_major" />
-        GPA: <input type="number" step = "0.1" min = "0.0" max = "4.0" id = "edit_gpa" data-ng-model = "candidate_info.edit_gpa" />
+        Password: <input type="password" id = "edit_p" name="edit_p" data-ng-model = "candidate_info.edit_p" /><br>
+        First name: <input type="text" id = "edit_first" data-ng-model = "candidate_info.edit_first" /><br>
+        Last name: <input type="text" id = "edit_last" data-ng-model = "candidate_info.edit_last" /><br>
+        Current location: <input type="text" id = "edit_cloc" data-ng-model = "candidate_info.edit_cloc" /><br>
+        Desired location: <input type="text" id = "edit_dloc" data-ng-model = "candidate_info.edit_dloc" /><br>
+        Most recent job: <input type="text" id = "edit_job" data-ng-model = "candidate_info.edit_job" /><br>
+        Education: <input type="text" id = "edit_edu" data-ng-model = "candidate_info.edit_edu" /><br>
+        Major <input type="text" id = "edit_major" data-ng-model = "candidate_info.edit_major" /><br>
+        GPA: <input type="number" step = "0.1" min = "0.0" max = "4.0" id = "edit_gpa" data-ng-model = "candidate_info.edit_gpa" /><br>
         Skills:
         <input type="checkbox" id = "edit_skills1" name = edit_skills1 data-ng-model = "candidate_info.edit_skills1" data-ng-init="candidate_info.edit_skills1=false" />Front end
         <input type="checkbox" id = "edit_skills2" name = "edit_skills2" data-ng-model = "candidate_info.edit_skills2" data-ng-init="candidate_info.edit_skills2=false" />Back end
-        <input type="checkbox" id = "edit_skills3" name = "edit_skills3" data-ng-model = "candidate_info.edit_skills3" data-ng-init="candidate_info.edit_skills3=false"/>Data science
-        Salary: <input type="number" min = "0" id = "edit_sal" data-ng-model = "candidate_info.edit_sal" />
-        Fun fact: <input type="text" id = "edit_fun" data-ng-model = "candidate_info.edit_fun"/> 
+        <input type="checkbox" id = "edit_skills3" name = "edit_skills3" data-ng-model = "candidate_info.edit_skills3" data-ng-init="candidate_info.edit_skills3=false"/>Data science<br>
+        Salary: <input type="number" min = "0" id = "edit_sal" data-ng-model = "candidate_info.edit_sal" /><br>
+        Fun fact: <input type="text" id = "edit_fun" data-ng-model = "candidate_info.edit_fun"/><br>
         <input type = "submit" data-ng-click = "editCandidate(candidate_info)" />
       </form>
     </div>
 
     <div class = "edit_job" data-ng-show="profile_type == 'job'">
-      {{current_profile}}
-      <!-- {{profile_picture}} -->
+      <div class = "job_profile" data-ng-show ="profile_type == 'job'">
+          <p>
+            <b>Company name:</b> {{current_profile.company_name}}<br>
+            <b>Title:</b> {{current_profile.title}}<br>
+            <b>Industry:</b> {{current_profile.industry}}<br>
+            <b>Location:</b> {{current_profile.location}}<br>
+            <b>Salary:</b> {{current_profile.salary | currency}}<br>
+            <b>Skills:</b> <br>
+            <b>Front end?</b> {{current_profile.skills1}}<br>
+            <b>Back end?</b> {{current_profile.skills2}} <br>
+            <b>Data science?</b> {{current_profile.skills3}} <br>
+            <b>Description: </b>{{current_profile.description}}
+          </p>
+       </div>
+      <p data-ng-show="logBool == 1">Edit Profile</p>
       <form method = "post" id = "edit">
-        Password: <input type="password" id = "edit_company_p" name="edit_company_p" data-ng-model = "job_info.edit_company_p" />
-        Company name: <input type="text" id = "edit_company_name" name="edit_company_name" data-ng-model = "job_info.edit_company_name" />
-        Location: <input type="text" id = "edit_company_loc" name="edit_company_loc" data-ng-model = "job_info.edit_company_loc" />
-        Title: <input type="text" id = "edit_title" name="edit_title" data-ng-model = "job_info.edit_title"/>
-        Industry: <input type="text" id = "edit_industry" name="edit_industry" data-ng-model = "job_info.edit_industry" />
+        Password: <input type="password" id = "edit_company_p" name="edit_company_p" data-ng-model = "job_info.edit_company_p" /><br>
+        Company name: <input type="text" id = "edit_company_name" name="edit_company_name" data-ng-model = "job_info.edit_company_name" /><br>
+        Location: <input type="text" id = "edit_company_loc" name="edit_company_loc" data-ng-model = "job_info.edit_company_loc" /><br>
+        Title: <input type="text" id = "edit_title" name="edit_title" data-ng-model = "job_info.edit_title"/><br>
+        Industry: <input type="text" id = "edit_industry" name="edit_industry" data-ng-model = "job_info.edit_industry" /><br>
         Skills: 
         <input type="checkbox" id = "edit_company_skills1" name = "edit_company_skills1" value = "frontend" data-ng-model = "job_info.edit_company_skills1" data-ng-init="job_info.edit_company_skills1=false"/>Front end
         <input type="checkbox" id = "edit_company_skills2" name = "edit_company_skills2" value = "backend" data-ng-model = "job_info.edit_company_skills2" data-ng-init="job_info.edit_company_skills2=false"/>Back end
-        <input type="checkbox" id = "edit_company_skills3" name = "edit_company_skills3" value = "data_science" data-ng-model = "job_info.edit_company_skills3" data-ng-init="job_info.edit_company_skills3=false"/>Data science
-        Salary: <input type="text" id = "edit_company_sal" name="edit_company_sal" data-ng-model = "job_info.edit_company_sal" />
-        Description: <input type="text" id = "edit_desc" name="edit_desc" data-ng-model = "job_info.edit_desc" /> 
+        <input type="checkbox" id = "edit_company_skills3" name = "edit_company_skills3" value = "data_science" data-ng-model = "job_info.edit_company_skills3" data-ng-init="job_info.edit_company_skills3=false"/>Data science<br>
+        Salary: <input type="text" id = "edit_company_sal" name="edit_company_sal" data-ng-model = "job_info.edit_company_sal" /><br>
+        Description: <input type="text" id = "edit_desc" name="edit_desc" data-ng-model = "job_info.edit_desc" /> <br>
         <input type = "submit" data-ng-click = "editJob(job_info)" />
       </form>
     </div>

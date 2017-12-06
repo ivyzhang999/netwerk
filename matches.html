@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8"/>
 		<title>Netwerk</title>
+		<style>
+			input[type=submit]{
+	        background-color: #96ceb4;
+	        border: none;
+	        color: black;
+	        cursor: pointer;
+	      }
+  		</style>
 	</head>    
 	<body>
 		<div class="matches"> 
-			<h4 data-ng-show="logBool == 1"><strong>Matches</strong></h4>
+			<p data-ng-show="logBool == 1" >Search </p>
 			<input type="text" data-ng-model="search" data-ng-show="logBool == 1" />
 			<p data-ng-repeat="match in matches_info | filter: search">
 			  {{match}}

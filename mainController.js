@@ -1,4 +1,5 @@
 app.factory('profilesFactory', function($http) {
+	// pull in job or candidate profiles
 	var profiles = {};	
 	profiles.getJobs = function(){
 		return $http.post("jobs_mysql.php");
@@ -10,18 +11,62 @@ app.factory('profilesFactory', function($http) {
 });
 
 app.controller('mainController', function($scope, $rootScope, $http, profilesFactory){
+	// use factory to get job and candidates profiles
 	var getProfiles = function(){
-
+		// if user is logged in
 		if ($rootScope.current_user !== ""){
 			if ($rootScope.profile_type === "candidate"){
 					profilesFactory.getJobs().then(function(response){
 					$rootScope.profiles = response.data.jobs;
+					
+					// parse skills variable
+					var profiles_len = Object.keys($rootScope.profiles).length;
+					$rootScope.len = profiles_len;
+					for (var i = 0; i < profiles_len; i++){
+						
+						if ($rootScope.profiles[i].skills[0]=="0"){
+							$rootScope.profiles[i].skills1 = "No";
+						} else { 
+							$rootScope.profiles[i].skills1 = "Yes";
+						}
+						if ($rootScope.profiles[i].skills[1]=="0"){
+							$rootScope.profiles[i].skills2 = "No";
+						} else { 
+							$rootScope.profiles[i].skills2 = "Yes";
+						}
+						if ($rootScope.profiles[i].skills[2]=="0"){
+							$rootScope.profiles[i].skills3 = "No";
+						} else { 
+							$rootScope.profiles[i].skills3 = "Yes";
+						}
+					}
+
 				});
 
 			}
-			else{
+			else{ // if user is a job
 				profilesFactory.getCandidates().then(function(response){
 					$rootScope.profiles = response.data.candidates;
+					var profiles_len = Object.keys($rootScope.profiles).length;
+					$rootScope.len = profiles_len;
+					for (var i = 0; i < profiles_len; i++){
+						
+						if ($rootScope.profiles[i].skills[0]=="0"){
+							$rootScope.profiles[i].skills1 = "No";
+						} else { 
+							$rootScope.profiles[i].skills1 = "Yes";
+						}
+						if ($rootScope.profiles[i].skills[1]=="0"){
+							$rootScope.profiles[i].skills2 = "No";
+						} else { 
+							$rootScope.profiles[i].skills2 = "Yes";
+						}
+						if ($rootScope.profiles[i].skills[2]=="0"){
+							$rootScope.profiles[i].skills3 = "No";
+						} else { 
+							$rootScope.profiles[i].skills3 = "Yes";
+						}
+					}
 				});
 			}	
 		}
@@ -66,7 +111,6 @@ app.controller('mainController', function($scope, $rootScope, $http, profilesFac
 	}
 
 	var showMatches = function(){
-		//alert($rootScope.matches);
 		if ($rootScope.current_user !== ""){
 			$http({
 				url: "show_matches.php",
@@ -86,14 +130,14 @@ app.controller('mainController', function($scope, $rootScope, $http, profilesFac
 						}
 					}
 
+					// get lengths and initialize variables for saving match info
 					$rootScope.matches = response.data.matches;
 					$rootScope.matchCount = Object.keys($rootScope.matches).length;
-
 					var matches_temp = $rootScope.matches;
 					var profiles_len = Object.keys($rootScope.profiles).length;
 					$rootScope.matches_info = [];
 					
-					
+					// save match info into rootScope variable 
 					if ($rootScope.profile_type === "job"){
 						for (var i = 0; i < profiles_len; i++){
 							if (matches_temp.indexOf($rootScope.profiles[i].username) !== -1){
@@ -126,6 +170,7 @@ app.controller('mainController', function($scope, $rootScope, $http, profilesFac
 
 	}
 
+	// parse skills variable
 	var assessSkills = function(skills){
 		$rootScope.headerBool = 0;
 		$rootScope.skills1Bool = 0;
@@ -160,18 +205,38 @@ app.controller('mainController', function($scope, $rootScope, $http, profilesFac
 				if (response.data.success === false){
 					alert(response.data.message);
 				}else{
+					// initalize scope variables
 					$rootScope.profile_type = login.profile_type;
 					$rootScope.current_user = login.username;
 					$rootScope.matchCount = -1;
-					alert("login success!");
-					getProfiles();
-					showMatches();
 					$rootScope.index = 0;
 					$rootScope.logBool = 1;
-					$rootScope.current_profile = response.data;
+					alert("login success!");
+
+					// call functions
+					getProfiles();
+					showMatches();
 					getSuggestion(response.data.location);
 					var skills = response.data.skills;
 					assessSkills(skills);
+
+					// save current profile 
+					$rootScope.current_profile = response.data;
+					if ($rootScope.current_profile.skills[0]=="0"){
+						$rootScope.current_profile.skills1 = "No";
+					} else { 
+						$rootScope.current_profile.skills1 = "Yes";
+					}
+					if ($rootScope.current_profile.skills[1]=="0"){
+						$rootScope.current_profile.skills2 = "No";
+					} else { 
+						$rootScope.current_profile.skills2 = "Yes";
+					}
+					if ($rootScope.current_profile.skills[2]=="0"){
+						$rootScope.current_profile.skills3 = "No";
+					} else { 
+						$rootScope.current_profile.skills3 = "Yes";
+					}
 					
 				}
 			});
@@ -189,12 +254,14 @@ app.controller('mainController', function($scope, $rootScope, $http, profilesFac
 				method: "POST"
 				}).then(function(response){
 						alert("logout success!");
+
+						// set scope variables back to nothing
 						$rootScope.profiles = "";
 						$rootScope.matches = "";
 						$rootScope.matches_info = "";
 						$rootScope.current_user = "";
 						$rootScope.logBool = 0;
-						$rootScope.profile_type = login.profile_type;
+						$rootScope.profile_type = '';
 						$rootScope.headerBool = 0;
 						$rootScope.skills1Bool = 0;
 						$rootScope.skills2Bool = 0;
@@ -315,7 +382,5 @@ app.controller('mainController', function($scope, $rootScope, $http, profilesFac
 					}
 				});
 		}
-
-
 });
 
