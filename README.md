@@ -9,8 +9,13 @@ If two profiles swipe right on each other, they "match" and will appear on the m
 Link: http://ec2-52-14-187-234.us-east-2.compute.amazonaws.com/~ivy.zhang/index2.html
 
 Example sign in: 
-for a Candidate: User: lebron PW: lebron
-for a Company: wonka PW: wonka
+
+for a Candidate: 
+User: lebron
+PW: lebron
+for a Company: 
+User:wonka 
+PW: wonka
 
 Creative protion:
 
