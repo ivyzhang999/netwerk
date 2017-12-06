@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Netwerk</title>
+  </head>    
+  <body> 
+
+    <div class = "main" data-ng-controller="mainController">
+      <div class="buttons">
+        <form id = "swipe">
+          <input type="button" value="right" data-ng-click="swipeRight()" data-ng-show="logBool == 1"/>
+          <input type="button" value="left" data-ng-click="swipeLeft()" data-ng-show="logBool == 1"/>
+        </form>
+      </div>
+
+      <div class="profiles">
+        <h4 data-ng-show="logBool == 1"><strong>Profiles</strong></h4>
+        <p class = "profiles" data-ng-swipe-right = "swipeRight()" data-ng-swipe-left = "swipeLeft()">{{profiles[index]}}</p>
+      </div>
+    </div>
+
+  </body>
+</html> 

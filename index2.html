@@ -4,155 +4,192 @@
     <title>Netwerk</title>
     <script src="angular.min.js"></script> 
     <script src="angular-touch/angular-touch.js"></script>
-<!--     <script src="swing.js"></script>
- -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="ng-file-upload.min.js"></script>
+
+    <style>
+      body{
+        background-color: white;
+        color: #4d4d4d;
+        font-family: "Futura";
+      }
+      .header{
+        display:inline-block; 
+        float: left;
+        width: 80%;
+        font-size:75px;
+      }
+      .top-right{
+        display:inline-block; 
+        float: right;
+        width: 20%;
+      }
+      .login{
+        display:inline-block; 
+        float: right;
+        width: 20%;
+        text-align:left;
+      }
+      .logout{
+        display:inline-block; 
+        float: right;
+        text-align:left;
+        width: 20%;
+      }
+      .current_user{
+        display:inline-block; 
+        float: right;
+        text-align:left;
+        width: 20%;
+      }
+      .holder{
+        clear:both;
+      }
+   
+      .tablink {
+          background-color: #cccccc;
+          color: white;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          font-size: 17px;
+          font-family: "Futura";
+          width: 25%;
+      }
+
+      /* Change background color of buttons on hover */
+      .tablink:hover {
+          background-color: #8c8c8c;
+      }
+
+      /*.today h3{
+        color: yellow;
+      }
+      p{
+        text-align: center; 
+        padding: 0px; 
+        margin: auto; 
+        width: 500px; 
+      }
+      h1{
+        text-align: center; 
+        color: red;
+        font-family: "Impact";
+      }
+      h4{color: red; padding:0px; margin: 0px;}
+      h3{color: white; padding:0px; margin: 0px; text-align: center;}
+      table {
+          table-layout: fixed;
+          width: 100px;
+      }
+      th {
+          border: 1px solid white;
+          table-layout: fixed;
+      }
+      td {
+        vertical-align: top;
+        border: 1px solid white;
+        height: 100px;
+      }*/
+      
+      /*.logout{
+        visibility: hidden;
+      }
+      .register{
+        display:inline-block; 
+        float: right;
+      }
+      .current_user_msg{
+        clear:both;
+        visibility: hidden;
+      }
+      .previous_month{display:inline-block;}
+      .next_month{display:inline-block; float: right;}
+      button{
+          background-color: #87CEFA;
+          border: none;
+          color: black;
+          cursor: pointer;
+      }*/
+    </style>
   </head>
+
   
 
 
-  <body ng-app="netwerk">
+  <body data-ng-app="netwerk">
     
-    <div class="header">
-      <div class="container">
-        <h1>Netwerk</h1>
-      </div>
-    </div>
-
-   <!--  <div class="current_info">
-      <p id = "current_user" type="hidden"></p>
-      <p id = "profile_type" type="hidden"></p>
-      <p id = "index" type="hidden"></p>
-    </div> -->
-
-    <div class = "main" ng-controller="mainController">
-      <h4><strong>Login</strong></h4>
-      <form method = "post" id = "login">
-        Type: 
-        <input type= "radio" ng-model="login.profile_type" name = "profile_type" value="candidate">Candidate
-        <input type= "radio" ng-model="login.profile_type" name = "profile_type" value="job">Job
-        Username: <input type="text" id = "login_u" ng-model = "login.username" />
-        Password: <input type="password" id = "login_p" ng-model = "login.password" />
-        <input type = "submit" ng-click = "login(login)" />
-      </form>
-
-
-      <form id = "logout">
-        <input type = "button" value = "logout" ng-click = "logout()" />
-      </form>
-
-
-      <div class="matches"> 
-        <h4><strong>Matches</strong></h4>
-        <input type="text" ng-model="search" />
-        <p ng-repeat="match in matches_info | filter: search">
-          {{match}}
-        </p>
-        <!-- <p class = "matches">{{matches}}</p> -->
-      </div>
-
-      <!-- <button class="button button-block"
-        ng-repeat="profile in profiles"
-        ng-click="like(profile)">
-        {{ profile }}
-      </button> -->
-
-      <div class="buttons">
-        <form id = "logout">
-          <input type="button" value="right" ng-click="swipeRight()"/>
-          <input type="button" value="left" ng-click="swipeLeft()"/>
-        </form>
-      </div>
-
-      <div class="profiles">
-        <h4><strong>Profiles</strong></h4>
-        <p class = "profiles" ng-swipe-right = "swipeRight()" ng-swipe-left = "swipeLeft()">{{profiles[index]}}</p>
-      </div>
-    </div>
-
-    <div class = "create" ng-controller="createController">
-      <h4><strong>Create profile</strong></h4>
-      <form method = "post" id = "create">
-        Type: 
-        <input type= "radio" ng-model="profile_type" ng-model="candidate_info.profile_type" name = "profile_type" value="candidate">Candidate
-        <input type= "radio" ng-model="profile_type" name = "profile_type" value="job">Job
-      </form>
-
-      <div ng-switch="profile_type">
-        <div ng-switch-when="candidate">
-          <form method = "post" id = "create_candidate">
-            New username: <input type="text" id = "create_u" ng-model = "candidate_info.create_u" />
-            New password (at least 5 characters): <input type="password" id = "create_p" ng-model = "candidate_info.create_p" />
-            First name: <input type="text" id = "create_first" ng-model = "candidate_info.create_first" />
-            Last name: <input type="text" id = "create_last" ng-model = "candidate_info.create_last" />
-            Current location: <input type="text" id = "create_cloc" ng-model = "candidate_info.create_cloc" />
-            Desired location: <input type="text" id = "create_dloc" ng-model = "candidate_info.create_dloc" />
-            Most recent job: <input type="text" id = "create_job" ng-model = "candidate_info.create_job" />
-            Education: <input type="text" id = "create_edu" ng-model = "candidate_info.create_edu" />
-            Major <input type="text" id = "create_major" ng-model = "candidate_info.create_major" />
-            GPA: <input type="number" step = "0.1" min = "0.0" max = "4.0" id = "create_gpa" ng-model = "candidate_info.create_gpa" />
-            Skills:
-            <input type="checkbox" id = "skills1" name = skills1 ng-model = "candidate_info.skills1" ng-init="candidate_info.skills1=false" />Front end
-            <input type="checkbox" id = "skills2" name = "skills2" ng-model = "candidate_info.skills2" ng-init="candidate_info.skills2=false" />Back end
-            <input type="checkbox" id = "skills3" name = "skills3" ng-model = "candidate_info.skills3" ng-init="candidate_info.skills3=false"/>Data science
-            Salary: <input type="number" min = "0" id = "create_sal" ng-model = "candidate_info.create_sal" />
-            Fun fact: <input type="text" id = "create_fun" ng-model = "candidate_info.create_fun"/>
-            
-            <!-- <input type="hidden" id="profile_type" ng-model="candidate_info.profile_type" value="candidate"/> -->
-            <input type = "submit" ng-click = "createCandidate(candidate_info)" />
-          </form>
-           
-        </div>
-      </div>
-
-
-
-      <div ng-switch="profile_type">
-        <div ng-switch-when="job">
-        <form method = "post" id = "create_j">
-          New username: <input type="text" id = "create_company_u" name="create_company_u" ng-model = "job_info.create_company_u" />
-          New password: <input type="password" id = "create_company_p" name="create_company_p" ng-model = "job_info.create_company_p" />
-          Company name: <input type="text" id = "create_company_name" name="create_company_name" ng-model = "job_info.create_company_name" />
-          Location: <input type="text" id = "create_company_loc" name="create_company_loc" ng-model = "job_info.create_company_loc" />
-          Title: <input type="text" id = "create_title" name="create_title" ng-model = "job_info.create_title"/>
-          Industry: <input type="text" id = "create_industry" name="create_industry" ng-model = "job_info.create_industry" />
-          Skills: 
-          <input type="checkbox" id = "company_skills1" name = "company_skills1" value = "frontend" ng-model = "job_info.company_skills1" ng-init="job_info.skills1=false"/>Front end
-          <input type="checkbox" id = "company_skills2" name = "company_skills2" value = "backend" ng-model = "job_info.company_skills2" ng-init="job_info.skills2=false"/>Back end
-          <input type="checkbox" id = "company_skills3" name = "company_skills3" value = "data_science" ng-model = "job_info.company_skills3" ng-init="job_info.skills3=false"/>Data science
-          Salary: <input type="text" id = "create_company_sal" name="create_company_sal" ng-model = "job_info.create_company_sal" />
-          Description: <input type="text" id = "create_desc" name="create_desc" ng-model = "job_info.create_desc" />
-          <!-- <input type="hidden" id="profile_type" value="job" /> -->
-          <input type = "submit" ng-click = "createJob(job_info)" />
-        </form>
-
-         </div>
-      </div>
-
-
-    </div> 
-    
-
-
-
-<!-- 
-    <div class="main" ng-controller="mainController">
-      <div class="container">
-        <p class = "profiles">{{profiles}}</p>
-      </div>
-    </div> -->
-
-
-
-
-
-   <!--  Modules -->
+    <!--  Modules -->
     <script src="app.js"></script>
 
    <!--  Controllers -->
     <script src="mainController.js"></script>
     <script src="createController.js"></script>
-<!--     <script src="loginController.js"></script>
- -->
+
+
+    <div class="header">
+        Netwerk
+        <br>
+    </div>
+
+ 
+    <div class = "top_right" data-ng-controller="mainController">
+      <div class = "login">
+        Login
+        <form method = "post" id = "login">
+          Type: 
+          <input type= "radio" data-ng-model="login.profile_type" name = "profile_type" value="candidate">Candidate
+          <input type= "radio" data-ng-model="login.profile_type" name = "profile_type" value="job">Job
+          <br>
+          Username: <input type="text" id = "login_u" data-ng-model = "login.username" />
+          <br>
+          Password: <input type="password" id = "login_p" data-ng-model = "login.password" />
+          <input type = "submit" data-ng-click = "login(login)" />
+        </form>
+      </div>
+
+      <form class = "logout" id = "logout">
+        <input type = "button" value = "logout" data-ng-click = "logout()" />
+      </form>
+
+
+      <p class = "current_user" data-ng-show="logBool == 1">
+        You are currently logged in as {{current_user}} 
+      </p>
+    </div>
+
+    <div class="holder">
+    </div>
+
+    <form action="#/!">
+      <input class = "tablink" type="submit" value="Main" />
+    </form>
+    <form action="#!create">
+      <input class = "tablink" type="submit" value="Create profile" />
+    </form>
+    <form action="#!edit">
+      <input class = "tablink" type="submit" value="My profile" />
+    </form>
+    <form action="#!matches">
+      <input class = "tablink" type="submit" value="Show matches" />
+    </form>
+ 
+
+    <!-- <a href="#/!">Main</a> -->
+    <!-- <a href="#!create">Create profile</a> -->
+    <!-- <a href="#!edit">My profile</a>
+    <a href="#!matches">Show matches</a> -->
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div data-ng-view=""></div>
+
+
 
   </body>
 </html>

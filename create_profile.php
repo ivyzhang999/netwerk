@@ -28,7 +28,7 @@ if ($profile_type == "candidate"){
 	    ){
 	  echo json_encode(array(
 	    "success" => false,
-	    "message" => $skills
+	    "message" => "error: empty field(s)"
 	  ));
 	  exit;
 	}

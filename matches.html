@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Netwerk</title>
+	</head>    
+	<body>
+		<div class="matches"> 
+			<h4 data-ng-show="logBool == 1"><strong>Matches</strong></h4>
+			<input type="text" data-ng-model="search" data-ng-show="logBool == 1" />
+			<p data-ng-repeat="match in matches_info | filter: search">
+			  {{match}}
+			</p>
+		</div>
+	</body>
+</html>
