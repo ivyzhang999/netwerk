@@ -1,6 +1,7 @@
 Authors: Brady Schaer and Ivy Zhang
 
 Product: Netwerk
+
 Description: Netwerk is a social networking tool meant as a combination of LinkedIn and Tinder. 
 Users can visit Netwerk, create profiles (For either a job or as a candidate), login, and view the opposite kinds of profiles on the main screen (i.e a candidate views other jobs)
 The user then can swipe left or right on a given profile, with a right swipe meaning yes and a left swipe meaning no. 
@@ -11,10 +12,15 @@ Link: http://ec2-52-14-187-234.us-east-2.compute.amazonaws.com/~ivy.zhang/index2
 Example sign in: 
 
 for a Candidate: 
+
 User: lebron
+
 PW: lebron
+
 for a Company: 
+
 User:wonka 
+
 PW: wonka
 
 Creative protion:
